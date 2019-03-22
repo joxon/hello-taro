@@ -1,34 +1,97 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Text, Input, Button } from '@tarojs/components'
 import './index.scss'
 
-export default class Index extends Component {
-
-  /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
+interface Props {}
+interface State {
+  items: string[]
+  itemInput: string
+}
+export default class Index extends Component<Props, State> {
   config: Config = {
     navigationBarTitleText: '首页'
   }
 
-  componentWillMount () { }
+  itemInput: string
 
-  componentDidMount () { }
+  constructor (props) {
+    super(props)
+    this.state = {
+      items: ['起床', '编程', '睡觉'],
+      itemInput: ''
+    }
+  }
 
-  componentWillUnmount () { }
+  componentWillMount () {}
 
-  componentDidShow () { }
+  componentDidMount () {}
 
-  componentDidHide () { }
+  componentWillUnmount () {}
+
+  componentDidShow () {}
+
+  componentDidHide () {}
+
+  addItem () {
+    let { items } = this.state
+    const itemInput = this.itemInput
+
+    if (itemInput === '') {
+      return
+    } else {
+      items.push(itemInput)
+    }
+
+    this.setState({
+      items,
+      itemInput: ''
+    })
+  }
+
+  // 输入框 onInput 的时候，它的值暂存起来
+  inputHandler (e) {
+    this.itemInput = e.target.value
+  }
+
+  delItem (index: number) {
+    let { items } = this.state
+    items.splice(index, 1)
+    this.setState({
+      items
+    })
+  }
 
   render () {
+    let { items, itemInput } = this.state
     return (
       <View className='index'>
-        <Text>Hello world!</Text>
+        <View className='list'>
+          <Text>To-do List</Text>
+          <View className='input-wrap'>
+            <Input
+              className='input'
+              onInput={this.inputHandler.bind(this)}
+              value={itemInput}
+            />
+            <Button className='btn add' onClick={this.addItem.bind(this)}>
+              添加
+            </Button>
+          </View>
+
+          {items.map((item, index) => (
+            <View className='item-wrap' key={index}>
+              <Text>
+                {index + 1}. {item}
+              </Text>
+              <Button
+                className='btn del'
+                onClick={this.delItem.bind(this, index)}
+              >
+                删除
+              </Button>
+            </View>
+          ))}
+        </View>
       </View>
     )
   }
