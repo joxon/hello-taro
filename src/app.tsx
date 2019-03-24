@@ -1,4 +1,4 @@
-import Taro, { Component, Config } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import Index from './pages/index'
 
 import './app.scss'
@@ -9,7 +9,7 @@ import './app.scss'
 //   require('nerv-devtools')
 // }
 
-class App extends Component {
+class App extends Taro.Component {
   /**
    * 指定config的类型声明为: Taro.Config
    *
@@ -17,7 +17,7 @@ class App extends Component {
    * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
-  config: Config = {
+  config: Taro.Config = {
     pages: ['pages/index/index'],
     window: {
       backgroundTextStyle: 'light',

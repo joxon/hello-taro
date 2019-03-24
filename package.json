@@ -4,7 +4,7 @@
   "private": true,
   "description": "hello, Taro!",
   "scripts": {
-    "wx": "npm run build:weapp -- --watch",
+    "wx": "taro build --type weapp -- --watch",
     "rm": "rimraf node_modules",
     "update": "taro update self && taro update project",
     "build:weapp": "taro build --type weapp",
@@ -60,6 +60,8 @@
     "eslint-plugin-taro": "1.2.21",
     "eslint-plugin-typescript": "^0.14.0",
     "rimraf": "^2.6.3",
+    "tslint": "^5.14.0",
+    "tslint-react": "^3.6.0",
     "typescript": "^3.3.4000"
   }
 }
