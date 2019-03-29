@@ -2,18 +2,18 @@ import Taro from '@tarojs/taro'
 import { View, Text, Input, Button } from '@tarojs/components'
 import './index.scss'
 
-interface Props {}
+interface IProps {}
 
-interface State {
+interface IState {
   items: string[]
   itemInput: string
 }
-export default class Index extends Taro.Component<Props, State> {
+export default class Index extends Taro.Component<IProps, IState> {
   config: Taro.Config = {
     navigationBarTitleText: '首页'
   }
 
-  constructor (props) {
+  constructor (props: any) {
     super(props)
     this.state = {
       items: ['起床', '编程', '睡觉'],
@@ -47,7 +47,7 @@ export default class Index extends Taro.Component<Props, State> {
   }
 
   // 输入框 onInput 的时候，它的值暂存起来
-  inputHandler (e) {
+  inputHandler (e: any) {
     this.setState({
       itemInput: e.target.value
     })
